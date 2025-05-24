@@ -1,10 +1,10 @@
-package com.ticket.ui;
+package src.ui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import com.ticket.dao.BookingDAO;
-import com.ticket.model.Booking;
+import src.dao.BookingDAO;
+import src.model.Booking;
 
 import java.util.List;
 
