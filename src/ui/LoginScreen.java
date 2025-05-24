@@ -1,7 +1,7 @@
-package com.ticket.ui;
+package src.ui;
 
 import javax.swing.*;
-import com.ticket.dao.UserDAO;
+import src.dao.UserDAO;
 
 import java.awt.*;
 import java.awt.event.*;
