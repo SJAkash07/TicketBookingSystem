@@ -1,4 +1,4 @@
-package com.ticket.model;
+package src.model;
 
 public class Booking {
     private String name;
