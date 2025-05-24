@@ -1,4 +1,4 @@
-package com.ticket.dao;
+package src.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
