@@ -1,6 +1,6 @@
-package com.ticket;
+package src.ticket;
 
-import com.ticket.ui.AuthScreen;
+import src.ui.AuthScreen;
 
 public class Main {
     public static void main(String[] args) {
