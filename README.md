@@ -1,5 +1,4 @@
-
-#  Ticket Booking System (Java + Swing + MySQL)
+# Ticket Booking System (Java + Swing + MySQL)
 
 This is a GUI-based Ticket Booking System built using Java Swing and MySQL. Users can book tickets for Train, Bus, or Flight, and all bookings are stored in a MySQL database via JDBC.
 
@@ -7,14 +6,14 @@ This is a GUI-based Ticket Booking System built using Java Swing and MySQL. User
 
 ## Features
 
--  Book tickets for Train, Bus, or Flight
--  Choose From and To destinations
--  See real-time available seats
--  Fare calculation based on mode and distance
--  Validations for input (e.g., name, email, and routes)
--  Login functionality with email & password
--  Ticket confirmation popup on successful booking
--  Clean and aesthetic user interface with consistent design
+- Book tickets for Train, Bus, or Flight
+- User login system with email and password
+- Choose From and To destinations
+- See real-time available seats
+- Fare calculation based on mode and distance
+- Validations for input (e.g., name, email, and routes)
+- Ticket confirmation popup on successful booking
+- Clean and aesthetic user interface with consistent design
 
 ---
 
@@ -32,13 +31,13 @@ This is a GUI-based Ticket Booking System built using Java Swing and MySQL. User
 1. **Create the database:**
 
 ```sql
-CREATE DATABASE ticket_booking_db;
+CREATE DATABASE ticketdb;
 ```
 
-2. **Create the table for bookings:**
+2. **Create the `bookings` table:**
 
 ```sql
-USE ticket_booking_db;
+USE ticketdb;
 
 CREATE TABLE bookings (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,6 +51,16 @@ CREATE TABLE bookings (
 );
 ```
 
+3. **Create the `users` table (for login system):**
+
+```sql
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(100) NOT NULL
+);
+```
+
 ---
 
 ## How to Run the Application
@@ -62,7 +71,7 @@ CREATE TABLE bookings (
 
 ```java
 Connection conn = DriverManager.getConnection(
-  "jdbc:mysql://localhost:3306/ticket_booking_db", "root", "your_password");
+  "jdbc:mysql://localhost:3306/ticketdb", "root", "your_password");
 ```
 
 4. Run the `Main.java` file to launch the application.
@@ -83,9 +92,10 @@ src/
 
 ## Improvements from Previous Version
 
-- Added a **Login Screen** with proper input validation and feedback
-- Enhanced UI design using **modern fonts, padding, colors, and hover effects**
-- Implemented dynamic **seat availability logic**
-- Added **fare calculation** based on distance and mode
-- Included **form validation** using regex and input listeners
-- Separated logic into **modular DAO and model classes**
+- Added a **Login Screen** with input validation and database check
+- Integrated a **users table** for secure login authentication
+- Enhanced UI using modern fonts, spacing, color palette, and hover effects
+- Implemented dynamic **seat availability** logic
+- Added **fare calculation** based on mode and distance
+- Real-time **form validation** using regex and listeners
+- Refactored code into **modular DAO and model structure**
