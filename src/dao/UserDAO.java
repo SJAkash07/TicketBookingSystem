@@ -1,6 +1,8 @@
 package src.dao;
 
 import java.sql.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class UserDAO {
     private final String url = "jdbc:mysql://localhost:3306/ticketdb";
@@ -11,6 +13,22 @@ public class UserDAO {
         return DriverManager.getConnection(url, username, password);
     }
 
+    // Hash password using SHA-256
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashed = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashed) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Hashing algorithm not found");
+        }
+    }
+
+    // Register a new user
     public boolean signUp(String name, String email, String pass) {
         String checkQuery = "SELECT * FROM users WHERE email = ?";
         String insertQuery = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
@@ -22,11 +40,17 @@ public class UserDAO {
             checkStmt.setString(1, email);
             ResultSet rs = checkStmt.executeQuery();
 
-            if (rs.next()) return false; // user already exists
+            if (rs.next()) {
+                rs.close();
+                return false; // user already exists
+            }
+            rs.close();
+
+            String hashedPass = hashPassword(pass);
 
             insertStmt.setString(1, name);
             insertStmt.setString(2, email);
-            insertStmt.setString(3, pass);
+            insertStmt.setString(3, hashedPass);
             insertStmt.executeUpdate();
             return true;
 
@@ -36,17 +60,25 @@ public class UserDAO {
         }
     }
 
+    // Authenticate user login
     public boolean signIn(String email, String pass) {
-        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
+        String query = "SELECT password FROM users WHERE email = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, email);
-            stmt.setString(2, pass);
             ResultSet rs = stmt.executeQuery();
 
-            return rs.next(); // returns true if a matching user is found
+            if (rs.next()) {
+                String storedHash = rs.getString("password");
+                rs.close();
+
+                String inputHash = hashPassword(pass);
+                return storedHash.equals(inputHash);
+            }
+            rs.close();
+            return false;
 
         } catch (SQLException e) {
             e.printStackTrace();
