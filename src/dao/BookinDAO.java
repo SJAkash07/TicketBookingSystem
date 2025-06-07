@@ -1,4 +1,4 @@
-package com.ticket.dao;
+package src.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ticket.module.Booking;
+import src.model.Booking;
 
 public class BookingDAO {
 
