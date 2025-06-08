@@ -82,11 +82,18 @@ Connection conn = DriverManager.getConnection(
 
 ```
 src/
-├── com.ticket.ui          # GUI components (Login, Booking screen)
-├── com.ticket.dao         # Data Access Objects for DB operations
-├── com.ticket.module      # Booking model class
-└── DBUtil.java            # Handles database connection setup
-```
+├── dao        
+  BookingDAO.java
+	DBUtil.java
+	UserDAO.java	
+├── model 
+  Booking.java
+├── ticket
+	Main.java
+└── ui
+	BookingScreen.java
+	LoginScreen.java
+	AuthScreen.java
 
 ---
 
