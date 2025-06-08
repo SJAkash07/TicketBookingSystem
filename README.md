@@ -84,16 +84,16 @@ Connection conn = DriverManager.getConnection(
 src/
 ├── dao        
   BookingDAO.java
-	DBUtil.java
-	UserDAO.java	
+  DBUtil.java
+  UserDAO.java	
 ├── model 
   Booking.java
 ├── ticket
-	Main.java
+  Main.java
 └── ui
-	BookingScreen.java
-	LoginScreen.java
-	AuthScreen.java
+  BookingScreen.java
+  LoginScreen.java
+  AuthScreen.java
 
 ---
 
