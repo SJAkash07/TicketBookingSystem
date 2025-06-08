@@ -95,7 +95,7 @@ src/
   LoginScreen.java
   AuthScreen.java
 
----
+```
 
 ## Improvements from Previous Version
 
